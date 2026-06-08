@@ -2,15 +2,9 @@ import pygame
 import time
 import random
 
-<<<<<<< HEAD
 #Инициали pygame
 pygame.init()
-=======
-# Инициализация pygame
-pygame.init()
->>>>>>> 6a4afc9dcf5e3445baf51cc525bc30ec2d3a02dd
 
-<<<<<<< HEAD
 #Цвета (RGB)
 white = (255,255,255)
 black = (0,0,0)
@@ -95,5 +89,47 @@ def gameLoop():
     if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
         game_over = True
 
+        #Обновление координат змейки
+        x1 += x1_change
+        y1 += y1_change
 
-=======
+        #Отрисовка фона
+        dis.fill(white)
+
+        #Отрисовка еды
+        pygame.draw.rect(dis, red, [foodx, foody, snake_block, snake_block])
+
+        #Добавление головы змейки в список
+        snake_Head = []
+        snake_Head.append(x1)
+        snake_Head.append(y1)
+        snake_list.append(snake_Head)
+
+        #Удаление лишних сегментов, если змейка не выросла
+        if len(snake_list) > Length_of_snake:
+            del snake_list[0]
+        
+        #Проверка столкновения с собой
+        for x in snake_list[:1]:
+            if x == snake_Head:
+                game_over = True
+        
+        #Отрисовки змейки и счета
+        our_snake(snake_block, snake_list)
+        your_score(Length_of_snake -1)
+
+        pygame.display.update()
+
+        #Проверка, съела ли змейка еду
+        if x1 == foodx and y1 == foody:
+            foodx = round(random.randrange(0,dis_width - snake_block)/ 20.0) * 20.0
+            foodx = round(random.randrange(0,dis_height - snake_block)/ 20.0) * 20.0
+            Length_of_snake += 1
+
+        clock.tick(snake_speed)
+
+    pygame.Quit()
+    Quit()
+
+#Запуск игры
+gameLoop()
