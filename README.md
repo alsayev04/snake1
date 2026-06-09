@@ -20,4 +20,4 @@
 6. Язык программирования: Python.
 7. Игровой движок: библиотека Pygame.
 8. Операционная система: Windows.
-9. Ссылка на облоко: 
+9. Ссылка на облоко: https://drive.google.com/file/d/1d61H_GXQO9Vmi28HRoN_tFVcnxQvOQkO/view?usp=sharing
