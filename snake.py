@@ -1,5 +1,4 @@
 import pygame
-import time
 import random
 
 #Инициали pygame
@@ -41,10 +40,29 @@ def our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, green, [x[0],x[1], snake_block, snake_block])
 
-def message(msg, color):
+def message(msg, color, snake_list=0):
     """Вывод сообщений на экран"""
     mesg = font_style.render(msg, True, color)
-    dis.blit(mesg, [dis_width / 6, dis_height/ 3])
+    dis.blit(mesg, [dis_width / 6, dis_height/ 3 + y_offset])
+
+def game_over_screen(score):
+    """Экран завершения игры с возможностью перезапуска"""
+    game_over = True
+    while game_over:
+        dis.fill(white)
+        message("GAME OVER", red,-50)
+        message(f "Ваш счет: {score}", black,0)
+        message("Нажмите С — Играть снова или Q — Выйти", black, 50)
+        pygame.display.update()
+
+        for event in pygame.event.get()
+        if event.type ==pygame.QUIT:
+            return False #Выходим из игры
+        if event.type ==pygame.KEYDOWN:
+            if event.key ==pygame.k_q:
+                return False # Выходим из игры
+            if event.key ==pygame.k_c:
+                return True  # Перезапускаем игру
 
 def gameLoop():
     """Главный игровой цикл"""
@@ -127,9 +145,12 @@ def gameLoop():
             Length_of_snake += 1
 
         clock.tick(snake_speed)
-
-    pygame.Quit()
-    Quit()
-
+    # Показываем экран завершения и получаем выбор пользователя
+    restart = game_over_screen(Length_of_snake -1)
+    if restart:
+        gameLoop() # Перезапуск игры
+    else
+        pygame.Quit() # Выход из игры
+        
 #Запуск игры
 gameLoop()
